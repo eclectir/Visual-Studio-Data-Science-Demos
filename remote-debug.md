@@ -1,22 +1,30 @@
-﻿Cross-platform Remote Debugging
+
+
+Cross-platform Remote Debugging
 ===============================
 
 For a five minute video introduction to remotely debugging Python code, see this video.
 
 [![Deep Dive: Cross-Platform Remote Debugging](VideoThumbnails/RemoteDebugging.png)](https://youtu.be/y1Qq7BrV6Cc)
 
-Overview
+Popular Data Science Scenario
+-----------------------------
+Often data scientists and ML engineers execute a code on a remote VM to take advantage of greater compute power required by techniques like Deep Learning. For instance, they may have a code running TensorFlow or the Cognitive Toolkit remotely only sending the final outcomes back to a client. With remote debug features, developers can debug such code just like they can debug code running locally without making changes to their workflow or experiment set-up. 
+
+Feature Overview
 --------
 
 Visual Studio can launch and debug Python applications locally, and can attach to already-running CPython processes on the local machine (or a remote Windows machine using the [Visual Studio Remote Debugging Monitor](http://msdn.microsoft.com/en-us/library/xf8k2h6a.aspx)). It is also possible to attach to code running on a different operating system, device, or a Python implementation other than CPython by using the [ptvsd](https://pypi.python.org/pypi/ptvsd) library.
 
 In this mode, the Python script being debugged also hosts the debug server to which the IDE can attach. It requires a small modification to the source code of your script (to import and enable the server), and may require network or filewall configuration to allow a TCP connection to be made between the IDE and the debuggee.
 
-
-Preparing the script for debugging
+Demo Overview
 ----------------------------------
 
 
+
+Preparing the script for debugging
+----------------------------------
 The following Python script will be used for demonstration purposes (taken without modifications from the Python wiki):
 
 ```python
