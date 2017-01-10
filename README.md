@@ -7,10 +7,10 @@ Examples/Demos in this repository are intended for new users, educators, and Mic
 For demos in the field, pick the demo appropriately covers the feature in context of scenario(s) most closely aligned with customers current needs and bent. For instance, there are two demos for the Cookiecutter Explorer feature; one utilizes the Azure Web Apps Cookiecutter template, while the other uses the IoT Hub/DocumentDB template. When demoing to a web development shop, Azure Web Apps one would be better pitch for the feature. If you can't find a demo you are looking for or have discovered a new customer scenario you'd like a demo for, shoot an email to uanwer@microsoft.com
 
 ## Repo Structure
-VisualStudio-Data-Science-Demos 
-<l> |_ <Demo Project> </l>
-                |_ <Solution Files>
-                |_ demo-pitch.md (Contains sales pitch, demo flow, and details for the demo)
+VisualStudio-Data-Science-Demos   
+|_ <Demo Project>  
+                |_ <Solution Files>  
+                |_ demo-pitch.md (Contains sales pitch, demo flow, and details for the demo)  
 
 ## Python Demos
 
