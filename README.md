@@ -8,7 +8,7 @@ For demos in the field, pick the demo appropriately covers the feature in contex
 
 ## Repo Structure
 VisualStudio-Data-Science-Demos 
-|_ <Demo Project>
+<l> |_ <Demo Project> </l>
                 |_ <Solution Files>
                 |_ demo-pitch.md (Contains sales pitch, demo flow, and details for the demo)
 
