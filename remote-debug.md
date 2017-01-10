@@ -80,7 +80,7 @@ After that, the "Qualifier" textbox and the "Available Processes" list will be b
 
 ![Entering the qualifier](Images/RemoteDebuggingQualifier.png)
 
-At this point, Python Tools should mention the process in the "Available Processes" list. An error at this stage typically indicates that the secret did not match, the `ptvsd` version does not match that being used by PTVS, or a connection could not be established. 
+Find the remote Python process in the "Available Processes" list. An error at this stage typically indicates that the secret did not match, the `ptvsd` version does not match that being used by PTVS, or a connection could not be established. 
 
 Common Failure Case: Remote machine has a firewall that is blocking the debug server port (default is 5678) open. Reconfigure the firewall or use a different port; the latter can be done by explicitly specifying it in the call to `enable_attach` in the `address` parameter, e.g.:
 
