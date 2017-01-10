@@ -1,4 +1,4 @@
-
+ 
 # VisualStudio-Data-Science-Demos
 A repository of demo code and scenario information for storytelling. 
 
@@ -8,9 +8,9 @@ For demos in the field, pick the demo appropriately covers the feature in contex
 
 ## Repo Structure
 VisualStudio-Data-Science-Demos   
-|_ Demo-Project 
-                |_ Solution Files  
-                |_ demo-pitch.md (Contains sales pitch, demo flow, and details for the demo)  
+|_ Demo-Project   
+                |_ Solution Files    
+                |_ demo-pitch.md (Contains sales pitch, demo flow, and details for the demo)    
 
 ## Python Demos
 
