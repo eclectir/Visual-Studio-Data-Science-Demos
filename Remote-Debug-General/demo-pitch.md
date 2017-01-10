@@ -1,3 +1,5 @@
+<button type="button">Send Feedback</button>
+
 Cross-platform Remote Debugging
 ===============================
 
