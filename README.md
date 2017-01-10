@@ -8,9 +8,10 @@ For demos in the field, pick the demo appropriately covers the feature in contex
 
 ## Repo Structure
 VisualStudio-Data-Science-Demos   
-|_ Demo-Project   
-          |_ Solution Files    
-          |_ demo-pitch.md (Contains sales pitch, demo flow, and details for the demo)    
+> Demo-Project   
+>> Project Files
+>> Solution File
+>> demo-pitch.md (Contains sales pitch, demo flow, and details for the demo)    
 
 ## Python Demos
 
