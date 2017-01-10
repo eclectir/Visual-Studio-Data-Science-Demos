@@ -1,7 +1,5 @@
 
 
-<button type="button">Send Feedback</button>
-
 Cross-platform Remote Debugging
 ===============================
 
@@ -27,6 +25,12 @@ Demo Overview
 3. Secure the debugger connection (optional, but good to highlight to enterprise customers)
 
 Note that the demo requires a remote VM with Python and PTVS istalled. It is recommended that the remoting demo skips setting up the VM, focusing on the core feature instead. 
+
+Longform demo: 30 min - 60 min
+You may cover all three steps and also discuss some of the internals mentioned on the documentation page. If it is meant for a training activity, you may also want to walk through the steps to set-up the VM.
+
+Shortform demo: 10 min - 30 min
+For shorter, time constrained demo, use the script in the repo and talk to the main points for steps 1 and 2. For a 20 or 30 minute demo, you could walthrough steps 1 and 2, writing code and making tweaks as you go. 
 
 Preparing the script for debugging
 ----------------------------------
