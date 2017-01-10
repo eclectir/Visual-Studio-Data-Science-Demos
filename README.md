@@ -12,8 +12,7 @@ For demos in the field, pick the demo appropriately covers the feature in contex
 --- | --- | ---
 Anaconda Distro | Machine Learning using the VS Data Science Workload only | Predictive Analysis with Anaconda in PTVS
 Remote Debugging | Debug code running on a Linux VM from your IDE | Remote debugging code running on a Linux VM with PTVS
-Cookiecutter Explorer | Developing apps from integrated templates | - Creating an IoT Data Pipeline with Azure IoT hub and DocumentDB
-- Creating an Azure Web app 
+Cookiecutter Explorer | Developing apps from integrated templates | Creating an IoT Data Pipeline with Azure IoT hub and DocumentDB
 Code Cells | Work with .py file exported from a Jupyter notebook | CodeCells and REPL
 Profiling | Find bottlenecks in your machine learning service | Profiling a simple classification script
 
