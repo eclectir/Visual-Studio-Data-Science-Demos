@@ -20,8 +20,9 @@ In this mode, the Python script being debugged also hosts the debug server to wh
 
 Demo Overview
 ----------------------------------
-
-
+1. Prepare the script for debugging
+2. Attach remotely from Python Tools 
+3. Secure the debugger connection (optional, but good to highlight to enterprise customers)
 
 Preparing the script for debugging
 ----------------------------------
@@ -52,26 +53,22 @@ else:
  
 The Python Tools debug server is contained in the `ptvsd` package that comes with Python Tools (search `ptvsd` in Start to find the folder) or can be installed from [PyPI](https://pypi.python.org/pypi/ptvsd) using `pip install ptvsd`.
 
-After the package is made available for import on the remote machine, add the following two lines of code to enable remote debugging in your script:
+After the package is made available for import on the remote machine, add the following two lines of code to enable remote debugging in at the start of your script:
 
 ```python
 import ptvsd
 ptvsd.enable_attach(secret='my_secret')
+ptvsd.wait_for_attach
 ```
 
-Ideally, these lines should be inserted at the earliest point in the script so that they are executed before any other code. It is not a strict requirement, but it will be impossible to debug any background threads spawned before the `enable_attach` function is called.
-
 The `secret` parameter passed to `enable_attach` is used to restrict access to the running script. When attaching, you will have to specify it in Visual Studio or the connection will be denied. To disable this and allow anyone to connect, use `enable_attach(secret=None)`.
-
-After making the necessary edits, start the script. Note that the call to `enable_attach` does not block – the debug server is launched on a background thread and awaits incoming connections while your program runs. The `wait_for_attach` function can be called after `enable_attach` to block program execution until the debugger attaches.
-
-In addition to the two functions mentioned above, ptvsd also provides a helper function `break_into_debugger`, which serves as a programmatic breakpoint if the debugger is attached. There is also an `is_attached` function that returns `True` if the debugger is attached (note that there is no need to check this result before calling any other `ptvsd` functions).
-
 
 Attaching remotely from Python Tools
 ------------------------------------
 
-The most common scenario for remote debugging is to set a breakpoint in the source and run the script until that breakpoint is hit. Note that you will need a local copy of the source file being debugged on the machine running Python Tools. It does not matter where the file is located, but its name should match the name of the actual script on the remote machine that will be attached to: 
+The most common scenario for remote debugging is to set a breakpoint in the source and run the script until that breakpoint is hit. 
+
+IMPORTANT: A local copy of the source file being debugged on the machine running Python Tools. It does not matter where the file is located, but its name should match the name of the actual script on the remote machine that will be attached to: 
 
 ![Setting a breakpoint](Images/RemoteDebuggingBreakpointSet.png)
 
@@ -83,7 +80,9 @@ After that, the "Qualifier" textbox and the "Available Processes" list will be b
 
 ![Entering the qualifier](Images/RemoteDebuggingQualifier.png)
 
-At this point, Python Tools will try to connect to the debug server on the remote machine and obtain various process information to display in the "Available Processes" list. An error at this stage typically indicates that the secret did not match, the `ptvsd` version does not match that being used by PTVS, or a connection could not be established. One of the common causes of failing to connect is that the remote machine has a firewall that is blocking the debug server port (default is 5678) open. You can either reconfigure the firewall or use a different port; the latter can be done by explicitly specifying it in the call to `enable_attach` in the `address` parameter, e.g.:
+At this point, Python Tools should mention the process in the "Available Processes" list. An error at this stage typically indicates that the secret did not match, the `ptvsd` version does not match that being used by PTVS, or a connection could not be established. 
+
+Common Failure Case: Remote machine has a firewall that is blocking the debug server port (default is 5678) open. Reconfigure the firewall or use a different port; the latter can be done by explicitly specifying it in the call to `enable_attach` in the `address` parameter, e.g.:
 
 ```python
 ptvsd.enable_attach(secret = 'my_secret', address = ('0.0.0.0', 8080))
@@ -91,23 +90,22 @@ ptvsd.enable_attach(secret = 'my_secret', address = ('0.0.0.0', 8080))
 
 The address format is the same as the one used by the standard Python module socket for sockets of type `AF_INET`; see its [documentation](http://docs.python.org/3/library/socket.html#socket-families) for details. 
 
-Once the process appears in the list, it can be double-clicked to attach to it. Visual Studio changes into the debugging perspective, while the script continues to run. For the example script shown above, entering a number will cause the breakpoint to be hit:
+Once the process appears in the list, double-click to attach to it. For the example script shown above, entering a number will cause the breakpoint to be hit:
 
 ![Breakpoint is hit](Images/RemoteDebuggingBreakpointHit.png)
 
 From there on, you can use all the usual debugging features offered by Python Tools. 
 
-If you stop debugging, Visual Studio detaches from your script, but the script will continue running on the remote machine. The debug server also continues running on its background thread, so you can re-attach to the process later using the same procedure.
-
+If you stop debugging, Visual Studio detaches from your script, but the script will continue running on the remote machine.
 
 Securing the debugger connection with SSL
 -----------------------------------------
 
-By default, the connection to the Python Tools remote debug server is not secured in any way – any person that knows the secret can connect, and all data is passed in plaintext. Consequently, it is possible for someone else on the network to snoop on data on the wire (which may contain e.g. values of variables in the debug script), or even execute a man-in-the-middle (MITM) attack. To prevent this when debugging over unsecured networks or Internet, the debug server supports SSL. 
+Obtain an SSL certificate to generate a self-signed certificate, as [described](http://docs.python.org/3/library/ssl.html#self-signed-certificates) in the documentation for Python standard module `ssl`. 
 
-To secure the channel with SSL, you need to have an SSL certificate. The easiest way to obtain one is to generate a self-signed certificate yourself, as [described](http://docs.python.org/3/library/ssl.html#self-signed-certificates) in the documentation for Python standard module `ssl`. To prevent MITM attacks, such a generated certificate will also have to be added to the CA root store on the Windows machine running Python Tools. This can be done using the Certificate Manager (certmgr.msc) as described [here](http://windows.microsoft.com/en-us/windows/import-export-certificates-private-keys). Note that you will need to have a separate certificate file (not combined with the private key in a single file) to import. 
+Note: To prevent MITM attacks, such a generated certificate will also have to be added to the CA root store on the Windows machine running Python Tools. This can be done using the Certificate Manager (certmgr.msc) as described [here](http://windows.microsoft.com/en-us/windows/import-export-certificates-private-keys). Note that you will need to have a separate certificate file (not combined with the private key in a single file) to import. 
 
-After you have the certificate and the private key files generated and registered, you will need to update the call to `enable_attach` in your script to use them. This is done by means of `certfile` and `keyfile` parameters, which have the same meaning as for the standard Python function `ssl.wrap_socket`. For example, if the certificate file is called `my_cert.cer`, and the key file is called `my_cert.key`, use: 
+Update the call to `enable_attach` in your script by means of `certfile` and `keyfile` parameters, which have the same meaning as for the standard Python function `ssl.wrap_socket`. For example, if the certificate file is called `my_cert.cer`, and the key file is called `my_cert.key`, use: 
 
 ```python
 ptvsd.enable_attach(secret='my_secret', certfile='my_cert.cer', keyfile='my_cert.key')
