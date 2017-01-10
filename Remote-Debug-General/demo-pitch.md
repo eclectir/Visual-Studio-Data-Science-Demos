@@ -1,5 +1,3 @@
-
-
 Cross-platform Remote Debugging
 ===============================
 
@@ -26,30 +24,7 @@ Demo Overview
 
 Preparing the script for debugging
 ----------------------------------
-The following Python script will be used for demonstration purposes (taken without modifications from the Python wiki):
-
-```python
-import random
-
-guesses_made = 0
-name = raw_input('Hello! What is your name?\n')
-number = random.randint(1, 20)
-print 'Well, {0}, I am thinking of a number between 1 and 20.'.format(name)
-
-while guesses_made < 6:
-    guess = int(raw_input('Take a guess: '))
-    guesses_made += 1
-    if guess < number:
-        print 'Your guess is too low.'
-    if guess > number:
-        print 'Your guess is too high.'
-    if guess == number:
-        break
-if guess == number:
-    print 'Good job, {0}! You guessed my number in {1} guesses!'.format(name, guesses_made)
-else:
-    print 'Nope. The number I was thinking of was {0}'.format(number)
-```
+The accompanying Python script will be used for demonstration purposes (taken without modifications from the Python wiki):
  
 The Python Tools debug server is contained in the `ptvsd` package that comes with Python Tools (search `ptvsd` in Start to find the folder) or can be installed from [PyPI](https://pypi.python.org/pypi/ptvsd) using `pip install ptvsd`.
 
