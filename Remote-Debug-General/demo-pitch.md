@@ -1,3 +1,5 @@
+
+
 <button type="button">Send Feedback</button>
 
 Cross-platform Remote Debugging
@@ -23,6 +25,8 @@ Demo Overview
 1. Prepare the script for debugging
 2. Attach remotely from Python Tools 
 3. Secure the debugger connection (optional, but good to highlight to enterprise customers)
+
+Note that the demo requires a remote VM with Python and PTVS istalled. It is recommended that the remoting demo skips setting up the VM, focusing on the core feature instead. 
 
 Preparing the script for debugging
 ----------------------------------
