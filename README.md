@@ -12,7 +12,7 @@ VisualStudio-Data-Science-Demos
 > Demo-Project   
 >> Project Files  
 >> Solution File  
->> demo-pitch.md (Contains sales pitch, demo flow, and details for the demo)    
+>> xxx-demo-pitch.ipynb (Contains sales pitch, demo flow, and details for the demo)    
 
 ## Python Demos
 
